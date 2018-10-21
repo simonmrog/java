@@ -1,16 +1,27 @@
-import java.io.IOException;
-import java.util.Scanner;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Main {
 	
-	private static Subject list[];
-	private static Scanner in;
-
-	public static void main (String args[]) throws IOException {
+	public static void createAndShowGUI(int numberOfSubjects) {
 		
-		in = new Scanner(System.in);
+		Window mainW = new Window(numberOfSubjects);
+		mainW.addContentsToPane(mainW.getContentPane());
+		mainW.setVisible(true);
+	}
+	
+	public static void main (String args[]) {
+		
+		int numberOfSubjects = 6;
+		createAndShowGUI(numberOfSubjects);
+		
 
-		System.out.print("Número de materias: ");
+		/*System.out.print("Número de materias: ");
 		int N = in.nextInt();
 		list = new Subject[N];
 		in.nextLine();
@@ -49,7 +60,7 @@ public class Main {
 			System.out.println("Nota final: " + subject.getSubjectGrade());
 		}
 		
-		System.out.println("Promedio acumulado: " + getGPA(N, list));
+		System.out.println("Promedio acumulado: " + getGPA(N, list));*/
 	}
 	
 	static float getGPA(int n, Subject[] list) {
