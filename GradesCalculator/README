@@ -1,3 +1,4 @@
 Program to calculate the GPA and the grades of a subject at the same time. Useful for college students.
 
 2018/10/19 Main.java and Subject.java classes created
+2018/10/20 Table details to Subject.java added, Window.java class created and Main.java modified
