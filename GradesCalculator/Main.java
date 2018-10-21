@@ -3,17 +3,16 @@ public class Main {
 	
 	public static void createAndShowGUI(int numberOfSubjects) {
 		
-		Window mainW = new Window(numberOfSubjects);
-		mainW.addContentsToPane(mainW.getContentPane());
-		mainW.setVisible(true);
+		Window mainW = new Window(numberOfSubjects);	//creates the main window
+		mainW.addContentsToPane(mainW.getContentPane());	//adds elements to window
+		mainW.setVisible(true);	//makes the window visible
 	}
 	
 	public static void main (String args[]) {
 		
-		int numberOfSubjects = 8;
-		createAndShowGUI(numberOfSubjects);
+		int numberOfSubjects = 7;	//number of subjects
+		createAndShowGUI(numberOfSubjects);	//creates the GUI
 		/*
-			
 			list[i] = subject;
 			subject.showSubjectStatus();
 			System.out.println("Nota final: " + subject.getSubjectGrade());
@@ -28,7 +27,8 @@ public class Main {
 		for (int i=0; i<n; i++) {
 			GPA = GPA + list[i].getCredits()*list[i].getSubjectGrade();
 			credits = credits + list[i].getCredits();
-		}		
+		}
+		
 		return (GPA/credits);
 	}
 }
