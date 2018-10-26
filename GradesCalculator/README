@@ -1,8 +1,16 @@
-Source files of a program (in progress) which calculates the GPA and the grades of a subject at the same time. Useful for college students.
+Source files of a program (in progress) which calculates the GPA and the grades of a subject at the same time. 
+Very useful for practicing and for semester calculations of any college student.
+
+UPDATES:
 
 2018/10/19 Main.java and Subject.java classes created
+
 2018/10/20 Table details to Subject.java added, Window.java class created and Main.java modified
-2018/10/21 GUI initials created
-2018/10/24 first time window added to get NumberOfSubjetcs.
-2018/10/25 validation if data.dat exists and method to get numberOfSubjects from it implemented. File data.dat must exist (for now)
-            in a folder called "resources" in the same folder of the program. ENTER key event added to the textfield of number of subjects
+
+2018/10/21 GUI initials created as tables, buttons and frames.
+
+2018/10/24 First time window added to get NumberOfSubjetcs in order to create the main frame.
+
+2018/10/25 Validation if data.dat exists and method to get numberOfSubjects from it implemented. 
+2018/10/25 File data.dat must exist (for now) in a folder called "resources" in the same folder of the program. 
+2018/10/25 ENTER key event added to the textfield of number of subjects
