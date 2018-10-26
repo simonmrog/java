@@ -94,10 +94,12 @@ public class Window extends JFrame {
 				//Filling the table
 				for (int j=0; j < numberOfRows; j++) {
 					line = br.readLine();
-					subjects[i].setValueAt(line, j, 0);
-					
+					String[] splited = line.split("\\s+");
+					subjects[i].setValueAt(splited[0], j, 0);
+					subjects[i].setValueAt(splited[1], j, 1);
+					subjects[i].setValueAt(splited[2], j, 2);
 				}
-				
+				subjects[i].centerTextInTable();
 				mainPanel.add(subjects[i]);	//adds the subject to the main panel
 			}
 		}
@@ -110,8 +112,6 @@ public class Window extends JFrame {
 				subjects[i].setGrade("Nota acumulada");
 				mainPanel.add(subjects[i]);	//adds the subject to the main panel
 			}
-			
 		}
-
 	}
 }

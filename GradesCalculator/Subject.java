@@ -93,6 +93,14 @@ public class Subject extends JPanel {
 			table.setValueAt(value, i, j);
 	}
 	
+	public void centerTextInTable() {
+		
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		for (int i=0; i<table.getColumnCount(); i++)
+			table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	}
+	
 	/*public float getSubjectGrade() {
 		
 		float perc, grade, value = 0;
