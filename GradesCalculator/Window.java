@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class Window extends JFrame {
@@ -52,7 +51,7 @@ public class Window extends JFrame {
 		//Cycle for creating and adding tables to the main panel
 		for (int i=0; i<numberOfSubjects; i++) {
 		
-			subjects[i] = new Subject(4, 4, tableWidth, tableHeight);	//creates subject 
+			subjects[i] = new Subject(8, 4, tableWidth, tableHeight);	//creates subject 
 			mainPanel.add(subjects[i]);	//adds the subject to the main panel
 		}
 		
