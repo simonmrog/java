@@ -1,47 +1,27 @@
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-public class Subject {
+public class Subject extends JTable {
 
 	String subjectName;
-	int size, credits;
-	String descriptions[];
-	float percents[], grades[];
+	String[] columnNames = {"Descripción", "Porcentaje (%)", "Nota (0-5)"};
 	
-	public Subject (String name, int gradesNumber, int cred) {
+	int numberOfRows, credits;
+	
+	public Subject (String name, int rows, int cred) {
+		
+		//Creates the model for our table
+		numberOfRows = rows;
+        DefaultTableModel model = new DefaultTableModel(columnNames, numberOfRows);
+        //Sets the new model
+		setModel(model);
 		
 		subjectName = new String(name);
-		size = gradesNumber;
 		credits = cred;
-		descriptions = new String[size];
-		percents = new float[size];
-		grades = new float[size];
-	}
-	
-	public void setDescription(int index, String desc) {
-		descriptions[index] = desc;
-	}
-	
-	public void setPercent(int index, float perc) {
-		percents[index] = perc;
-	}
-	
-	public void setGrade(int index, float grade) {
-		grades[index] = grade;
 	}
 	
 	public String getName() {
 		return subjectName;
-	}
-	
-	public String getDescription(int index) {
-		return descriptions[index];
-	}
-	
-	public float getPercent(int index) {
-		return percents[index];
-	}
-	
-	public float getGrade(int index) {
-		return grades[index];
 	}
 	
 	public int getCredits() {
@@ -50,14 +30,27 @@ public class Subject {
 	
 	public float getSubjectGrade() {
 		
-		float value = 0;
-		for (int i=0; i<size; i++)
-			value = value + percents[i]*grades[i];
+		float perc, grade, value = 0;
+		
+		for (int i=0; i<numberOfRows; i++) {
+			
+			perc = (float) getModel().getValueAt(i,1);
+			grade = (float) getModel().getValueAt(i, 2);
+			value = value + perc*grade;
+		}
 		return value/100;	
 	}
 	
 	public void showSubjectStatus() {
-		for (int i=0; i<size; i++)
-			System.out.println(descriptions[i] + " " + percents[i] + " " + grades[i]);
+		
+		String desc, perc, grades;
+		
+		for (int i=0; i<numberOfRows; i++) {
+			
+			desc = (String) getModel().getValueAt(i,0);
+			perc = (String) getModel().getValueAt(i,1);
+			grades = (String) getModel().getValueAt(i,2);
+			System.out.println(desc + " " + perc + " " + grades);
+		}
 	}
 }
