@@ -20,52 +20,80 @@ public class Subject extends JPanel {
 	
 	//Subject components
 	JTable table;
-	DefaultTableModel model;
+	DefaultTableModel model; //model for the table
 	JScrollPane scrollpane; 
-	JTextField subjectTitle;
+	JTextField subjectTitleField;
+	JTextField subjectGrade;
 	
 	public Subject (int rows, int cred, int width, int height) {
 		
-		numberOfRows = rows;
 		credits = cred;
 		
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		
 		//Creates a textfield for the title
-		subjectTitle = new JTextField("Subject name");
-		subjectTitle.setMaximumSize(new Dimension(200, 800));
-
+		subjectTitleField = new JTextField("Nombre");
+		subjectTitleField.setMaximumSize(new Dimension(200, 800));
+		subjectTitleField.setHorizontalAlignment(JTextField.CENTER);
+		
+		//Creates a textfield for the grade
+		subjectGrade = new JTextField("Nota acumulada");
+		subjectGrade.setMaximumSize(new Dimension(200, 800));
+		subjectGrade.setHorizontalAlignment(JTextField.CENTER);
 		
 		//Creates and configures our subject table
-        model = new DefaultTableModel(columnNames, numberOfRows);
+        model = new DefaultTableModel(columnNames, rows);
 		table = new JTable(model);
 		table.setRowHeight(25);
 		table.setFillsViewportHeight(true);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		table.setPreferredScrollableViewportSize(new Dimension(width, height));
-		
-		//Centers data in the table
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-		table.setDefaultRenderer(String.class, centerRenderer);	
 		scrollpane = new JScrollPane(table);
 		
 		setLayout(layout);
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		add(subjectTitle);
+		add(subjectTitleField);
+		add(subjectGrade);
 		add(scrollpane);
+
 	}
 	
 	public String getName() {
 		return subjectName;
 	}
 	
+	public float getGrade() {
+		String line = subjectGrade.getText();
+		return Float.parseFloat(line);
+	}
+	
+	public int getNumberOfRows() {
+		return numberOfRows;
+	}
+	
 	public int getCredits() {
 		return credits;
 	}
 	
-	public float getSubjectGrade() {
+	public void setName(String name) {
+		subjectTitleField.setText(name);
+	}
+	
+	public void setGrade(String grade) {
+		subjectGrade.setText(grade);
+	}
+	
+	public void setNumberOfRows(int rows) {
+		numberOfRows = rows;
+	}
+	
+	public void setValueAt(String value, int i, int j) {
+		if (i < table.getRowCount() && j < table.getColumnCount())
+			table.setValueAt(value, i, j);
+	}
+	
+	/*public float getSubjectGrade() {
 		
 		float perc, grade, value = 0;
 		
@@ -89,5 +117,5 @@ public class Subject extends JPanel {
 			grades = (String) table.getModel().getValueAt(i,2);
 			System.out.println(desc + " " + perc + " " + grades);
 		}
-	}
+	}*/
 }
