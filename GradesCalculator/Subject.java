@@ -55,9 +55,6 @@ public class Subject extends JPanel {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		add(subjectTitle);
 		add(scrollpane);
-
-		
-		
 	}
 	
 	public String getName() {
