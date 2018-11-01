@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -87,14 +86,17 @@ public class Window extends JFrame {
 				//creates subject 
 				subjects[i] = new Subject(10, 4, tableWidth, tableHeight);	
 				subjects[i].setName(br.readLine()); //sets subject name
-				subjects[i].setGrade(br.readLine()); //sets subject grade
+				line = br.readLine();
+				String[] splited = line.split("\\s+");
+				subjects[i].setGrade(splited[0]); //sets subject grade
+				subjects[i].setCredits(splited[1]); //sets subject credits
 				String string = br.readLine();
 				int numberOfRows = Integer.parseInt(string); //sets number of rows
 				subjects[i].setNumberOfRows(numberOfRows);
 				//Filling the table
 				for (int j=0; j < numberOfRows; j++) {
 					line = br.readLine();
-					String[] splited = line.split("\\s+");
+					splited = line.split("\\s+");
 					subjects[i].setValueAt(splited[0], j, 0);
 					subjects[i].setValueAt(splited[1], j, 1);
 					subjects[i].setValueAt(splited[2], j, 2);

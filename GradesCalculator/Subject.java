@@ -23,7 +23,7 @@ public class Subject extends JPanel {
 	DefaultTableModel model; //model for the table
 	JScrollPane scrollpane; 
 	JTextField subjectTitleField;
-	JTextField subjectGrade;
+	JTextField subjectGrade, subjectCredits;
 	
 	public Subject (int rows, int cred, int width, int height) {
 		
@@ -36,10 +36,20 @@ public class Subject extends JPanel {
 		subjectTitleField.setMaximumSize(new Dimension(200, 800));
 		subjectTitleField.setHorizontalAlignment(JTextField.CENTER);
 		
+		JPanel panel = new JPanel();
+		
 		//Creates a textfield for the grade
 		subjectGrade = new JTextField("Nota acumulada");
 		subjectGrade.setMaximumSize(new Dimension(200, 800));
 		subjectGrade.setHorizontalAlignment(JTextField.CENTER);
+		
+		//Creates a textfield for the credits
+		subjectCredits = new JTextField("Créditos");
+		subjectCredits.setMaximumSize(new Dimension(200, 800));
+		subjectCredits.setHorizontalAlignment(JTextField.CENTER);
+		
+		panel.add(subjectGrade);
+		panel.add(subjectCredits);
 		
 		//Creates and configures our subject table
         model = new DefaultTableModel(columnNames, rows);
@@ -54,7 +64,7 @@ public class Subject extends JPanel {
 		setLayout(layout);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		add(subjectTitleField);
-		add(subjectGrade);
+		add(panel);
 		add(scrollpane);
 
 	}
@@ -99,6 +109,10 @@ public class Subject extends JPanel {
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		for (int i=0; i<table.getColumnCount(); i++)
 			table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	}
+
+	public void setCredits(String credits) {
+		subjectCredits.setText(credits);
 	}
 	
 	/*public float getSubjectGrade() {
