@@ -16,7 +16,7 @@ public class Subject extends JPanel {
 	//Subject parameters
 	String subjectName;
 	String[] columnNames = {"Descripción", "Valor (%)", "Nota (0-5)"};
-	int numberOfRows, credits;
+	int numberOfRows;
 	
 	//Subject components
 	JTable table;
@@ -25,10 +25,8 @@ public class Subject extends JPanel {
 	JTextField subjectTitleField;
 	JTextField subjectGrade, subjectCredits;
 	
-	public Subject (int rows, int cred, int width, int height) {
-		
-		credits = cred;
-		
+	public Subject (int rows, int width, int height) {
+			
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		
 		//Creates a textfield for the title
@@ -61,6 +59,12 @@ public class Subject extends JPanel {
 		table.setPreferredScrollableViewportSize(new Dimension(width, height));
 		scrollpane = new JScrollPane(table);
 		
+		for (int i=0; i<10; i++) {
+			table.setValueAt(" ", i, 0);
+			table.setValueAt(" ", i, 1);
+			table.setValueAt(" ", i, 2);
+		}
+		
 		setLayout(layout);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		add(subjectTitleField);
@@ -79,15 +83,24 @@ public class Subject extends JPanel {
 	}
 	
 	public int getNumberOfRows() {
+		
+		numberOfRows = 0;
+		String line = (String) table.getValueAt(0, 2);
+		for (int i=1; !line.equals(" "); i++) {
+			numberOfRows = numberOfRows + 1;
+			line = (String) table.getValueAt(i, 2);
+		}
 		return numberOfRows;
 	}
 	
 	public int getCredits() {
-		return credits;
+		String line = subjectCredits.getText();
+		return Integer.parseInt(line);
 	}
 	
 	public void setName(String name) {
 		subjectTitleField.setText(name);
+		subjectName = name;
 	}
 	
 	public void setGrade(String grade) {

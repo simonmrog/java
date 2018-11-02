@@ -6,11 +6,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -76,6 +79,12 @@ public class Window extends JFrame {
 		
 		//creates the save button
 		saveButton = new JButton("Guardar");
+		saveButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				saveData();
+			}
+		});
 		
 		//adds the components to the calculation panel
 		calculations.add(GPATextField);
@@ -99,7 +108,7 @@ public class Window extends JFrame {
 			//Cycle for creating and adding tables to the main panel
 			for (int i=0; i<numberOfSubjects; i++) {
 				//creates subject 
-				subjects[i] = new Subject(10, 4, tableWidth, tableHeight);	
+				subjects[i] = new Subject(10, tableWidth, tableHeight);	
 				subjects[i].setName(br.readLine()); //sets subject name
 				line = br.readLine();
 				String[] splited = line.split("\\s+");
@@ -124,7 +133,7 @@ public class Window extends JFrame {
 			//Cycle for creating and adding empty tables to the main panel
 			for (int i=0; i<numberOfSubjects; i++) {
 				//creates subject 
-				subjects[i] = new Subject(10, 4, tableWidth, tableHeight);
+				subjects[i] = new Subject(10, tableWidth, tableHeight);
 				subjects[i].setName("Nombre materia #" + Integer.toString(i+1));
 				subjects[i].setGrade("Nota acumulada");
 				mainPanel.add(subjects[i]);	//adds the subject to the main panel
@@ -155,5 +164,45 @@ public class Window extends JFrame {
 			sum = sum + subjects[i].getCredits();
 		}
 		GPATextField.setText(GPA/sum + "");
+	}
+	
+	private void saveData() {
+		
+		String fileName = "data.dat";
+		File file = new File("resources\\" + fileName);
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(file);
+			String line = numberOfSubjects + "";
+			fw.write(line + '\n');
+			System.out.print(numberOfSubjects);
+					
+			for (int i=0; i<numberOfSubjects; i++) {
+				
+				fw.write(subjects[i].getName() + "\n");
+				fw.write(subjects[i].getGrade() + " " + subjects[i].getCredits() + "\n");
+				fw.write(subjects[i].getNumberOfRows() + "\n");
+				for (int j=0; j<subjects[i].numberOfRows; j++) {
+					
+					fw.write(subjects[i].getValueAt(j, 0) + " " + 
+							subjects[i].getValueAt(j, 1) + " " + 
+							subjects[i].getValueAt(j, 2) + "\n");
+				}
+			}
+			
+			JOptionPane.showMessageDialog(this, "Datos guardados satisfactoriamente");
+					
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				fw.close();
+			}
+			catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 }
