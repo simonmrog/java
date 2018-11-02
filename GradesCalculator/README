@@ -17,4 +17,4 @@ UPDATES:
 
 2018/10/26 validateData function, addDataToSubjects function created and finished, saveButton created. 
 
-2018/11/01 credits textfield created and added to subject.
+2018/11/01 credits textfield created and added to subject, functions to calculate GPA and grades created and implemented.
