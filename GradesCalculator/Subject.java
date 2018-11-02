@@ -40,12 +40,12 @@ public class Subject extends JPanel {
 		
 		//Creates a textfield for the grade
 		subjectGrade = new JTextField("Nota acumulada");
-		subjectGrade.setMaximumSize(new Dimension(200, 800));
+		subjectGrade.setPreferredSize(new Dimension(100, 30));
 		subjectGrade.setHorizontalAlignment(JTextField.CENTER);
 		
 		//Creates a textfield for the credits
 		subjectCredits = new JTextField("Créditos");
-		subjectCredits.setMaximumSize(new Dimension(200, 800));
+		subjectCredits.setPreferredSize(new Dimension(100, 30));
 		subjectCredits.setHorizontalAlignment(JTextField.CENTER);
 		
 		panel.add(subjectGrade);
@@ -103,6 +103,11 @@ public class Subject extends JPanel {
 			table.setValueAt(value, i, j);
 	}
 	
+	public String getValueAt(int i, int j) {
+		return (String) (table.getValueAt(i, j));
+	}
+	
+	
 	public void centerTextInTable() {
 		
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -115,7 +120,7 @@ public class Subject extends JPanel {
 		subjectCredits.setText(credits);
 	}
 	
-	/*public float getSubjectGrade() {
+	public float getSubjectGrade() {
 		
 		float perc, grade, value = 0;
 		
@@ -139,5 +144,5 @@ public class Subject extends JPanel {
 			grades = (String) table.getModel().getValueAt(i,2);
 			System.out.println(desc + " " + perc + " " + grades);
 		}
-	}*/
+	}
 }

@@ -114,7 +114,7 @@ public class Main {
 		frame.add(panel); //adds the panel to the frame
 		frame.setVisible(true);
 	}
-	
+
 	public static void validateData(JFrame frame, JTextField field, String fileName) throws IOException {
 		
 		int numberOfSubjects = Integer.parseInt(field.getText());

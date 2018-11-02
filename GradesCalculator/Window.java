@@ -3,6 +3,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class Window extends JFrame {
 	private GridLayout calculationsGrid;
 	JButton calculateButton;
 	JButton saveButton;
-	JTextField textField;
+	JTextField GPATextField;
 	
 	//subjects of the program
 	Subject[] subjects;
@@ -54,19 +56,32 @@ public class Window extends JFrame {
 		mainPanel.setLayout(mainGrid);	//Sets the layout for the panel
 	
 		subjects = new Subject[numberOfSubjects];	//Creates array of subjects
+		
+		//Creates and adds the textfield to the panel
+		GPATextField = new JTextField("Promedio acumulado");
 
 		//Creates and fills the button panel
 		calculations = new JPanel();
 		calculations.setLayout(calculationsGrid);
+		
 		//Creates and adds the button to the panel
 		calculateButton = new JButton("Calcular");
-		calculations.add(calculateButton);
+		calculateButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				calculateSubjectGrades();
+				calculateGPA();
+		    }
+		});
+		
+		//creates the save button
 		saveButton = new JButton("Guardar");
+		
+		//adds the components to the calculation panel
+		calculations.add(GPATextField);
+		calculations.add(calculateButton);
 		calculations.add(saveButton);
-		//Creates and adds the textfield to the panel
-		textField = new JTextField("Promedio acumulado");
-		calculations.add(textField);
-
+		
 		//Adds the panels to the frame container
 		pane.add(mainPanel);
 		pane.add(calculations, BorderLayout.SOUTH);
@@ -115,5 +130,30 @@ public class Window extends JFrame {
 				mainPanel.add(subjects[i]);	//adds the subject to the main panel
 			}
 		}
+	}
+	
+	private void calculateSubjectGrades() {
+			
+		for (int i=0; i<numberOfSubjects; i++) {
+			
+			float x = 0, percent, value;
+			
+			for (int j=0; j<subjects[i].getNumberOfRows(); j++) {
+				percent = Float.parseFloat(subjects[i].getValueAt(j, 1));
+				value = Float.parseFloat(subjects[i].getValueAt(j, 2));
+				x = x + value*percent;
+			}
+			subjects[i].setGrade(x/100 + "");
+		}
+	}
+	
+	public void calculateGPA() {
+		
+		float GPA = 0, sum = 0;
+		for (int i=0; i<numberOfSubjects; i++) {
+			GPA = GPA + subjects[i].getGrade()*subjects[i].getCredits();
+			sum = sum + subjects[i].getCredits();
+		}
+		GPATextField.setText(GPA/sum + "");
 	}
 }
