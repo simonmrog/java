@@ -1,2 +1,2 @@
 # Java-projects
-Some java projects and codes made in Eclipse
+Some java projects and codes made using Eclipse for Java
