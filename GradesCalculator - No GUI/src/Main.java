@@ -10,7 +10,7 @@ public class Main {
 		
 		in = new Scanner(System.in);
 
-		System.out.print("NÃºmero de materias: ");
+		System.out.print("Número de materias: ");
 		int N = in.nextInt();
 		list = new Subject[N];
 		in.nextLine();
@@ -19,18 +19,18 @@ public class Main {
 			System.out.print("Nombre de la materia: ");
 			String name = in.nextLine();
 			
-			System.out.print("CrÃ©ditos de " + name + ": ");
+			System.out.print("Créditos de " + name + ": ");
 			int credits = in.nextInt();
 			in.nextLine();
 			
-			System.out.print("Â¿CuÃ¡ntas notas tiene " + name + ":");
+			System.out.print("¿Cuántas notas tiene " + name + ":");
 			int size = in.nextInt();
 			in.nextLine();
 			
 			Subject subject = new Subject(name, size, credits);
 			
 			for (int j=0; j<size; j++) {
-				System.out.println("Ingrese una descripciÃ³n para la nota # " + j + 1 + ":");
+				System.out.println("Ingrese una descripción para la nota # " + j + 1 + ":");
 				String desc = in.nextLine();
 				subject.setDescription(j, desc);
 				
